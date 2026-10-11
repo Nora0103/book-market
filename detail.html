@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>书籍详情 - 校园二手书</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h2>校园二手书</h2>
+        <nav>
+            <a href="index.html">首页</a>
+            <a href="list.html">书籍市场</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="detail-box">
+            <div class="detail-img">
+                <img src="https://via.placeholder.com/300x300/eeeeee/333333?text=书籍封面" alt="书籍封面">
+            </div>
+            <div class="detail-info">
+                <h2 id="bookName">书籍名称加载中...</h2>
+                <p>成色：9成新（无笔记划线）</p>
+                <p>交易方式：校内面交 / 快递</p>
+                <p class="price" id="bookPrice">¥15.00</p>
+                <p>卖家信息：李同学（计算机科学与技术专业）</p>
+                <button class="btn" onclick="openContactModal()">联系卖家</button>
+                <button class="btn" style="background:#ff9800; margin-top:10px;" onclick="addWishList()">加入心愿单</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 联系卖家弹窗 -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <h3>联系卖家</h3>
+            <p>微信号：student_book_2024</p>
+            <p>请备注：购买二手书</p>
+            <button class="btn" style="width:auto; padding:5px 20px;" onclick="closeContactModal()">关闭</button>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const name = urlParams.get('name');
+            if(name) {
+                document.getElementById('bookName').innerText = name;
+                const prices = { '高等数学': 15, '大学英语': 10, '数据结构': 18, '考研政治1000题': 25, '考研英语历年真题': 30 };
+                document.getElementById('bookPrice').innerText = '¥' + (prices[name] || 15) + '.00';
+            }
+        }
+        function openContactModal() {
+            document.getElementById('contactModal').style.display = 'flex';
+        }
+        function closeContactModal() {
+            document.getElementById('contactModal').style.display = 'none';
+        }
+        function addWishList() {
+            alert('已加入心愿单！');
+        }
+    </script>
+</body>
+</html>

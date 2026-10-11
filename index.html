@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园二手书交易平台 - 首页</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h2>校园二手书</h2>
+        <nav>
+            <a href="index.html">首页</a>
+            <a href="list.html">书籍市场</a>
+            <a href="#">发布书籍</a>
+            <a href="#">个人中心</a>
+        </nav>
+        <span style="font-size:12px; opacity:0.8;">未来设计师</span>
+    </header>
+    <div class="container">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="搜索书名、作者或专业...">
+            <button onclick="searchBook()">搜索</button>
+        </div>
+        <!-- 轮播图区域 -->
+        <div style="text-align:center; margin-bottom:20px;">
+            <img src="https://via.placeholder.com/1000x300/4CAF50/FFFFFF?text=开学季+旧书换新颜" alt="轮播图" style="width:100%; border-radius:8px;">
+        </div>
+        <h2 style="margin-bottom: 15px;">热门推荐</h2>
+        <div class="book-grid">
+            <div class="book-card" onclick="goToDetail('高等数学')">
+                <img src="https://via.placeholder.com/220x200/eeeeee/333333?text=高等数学" alt="书">
+                <div class="book-info">
+                    <h3>高等数学（第七版）</h3>
+                    <p class="price">¥15.00</p>
+                    <p class="seller">卖家：李同学（计算机系）</p>
+                </div>
+            </div>
+            <div class="book-card" onclick="goToDetail('大学英语')">
+                <img src="https://via.placeholder.com/220x200/eeeeee/333333?text=大学英语" alt="书">
+                <div class="book-info">
+                    <h3>大学英语综合教程</h3>
+                    <p class="price">¥10.00</p>
+                    <p class="seller">卖家：王同学（外语系）</p>
+                </div>
+            </div>
+            <div class="book-card" onclick="goToDetail('数据结构')">
+                <img src="https://via.placeholder.com/220x200/eeeeee/333333?text=数据结构" alt="书">
+                <div class="book-info">
+                    <h3>数据结构（C语言版）</h3>
+                    <p class="price">¥18.00</p>
+                    <p class="seller">卖家：张同学（软件工程）</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function searchBook() {
+            var keyword = document.getElementById('searchInput').value;
+            if(keyword) {
+                window.location.href = 'list.html?keyword=' + encodeURIComponent(keyword);
+            } else {
+                alert('请输入搜索内容！');
+            }
+        }
+        function goToDetail(bookName) {
+            window.location.href = 'detail.html?name=' + encodeURIComponent(bookName);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>书籍市场 - 校园二手书</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h2>校园二手书</h2>
+        <nav>
+            <a href="index.html">首页</a>
+            <a href="list.html">书籍市场</a>
+            <a href="#">发布书籍</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h2 id="pageTitle" style="margin-bottom:20px;">全部书籍</h2>
+        <div style="margin-bottom: 15px;">
+            <button class="btn" style="width:auto; display:inline-block; padding:5px 15px;" onclick="filterBooks('all')">全部</button>
+            <button class="btn" style="width:auto; display:inline-block; padding:5px 15px;" onclick="filterBooks('教材')">教材</button>
+            <button class="btn" style="width:auto; display:inline-block; padding:5px 15px;" onclick="filterBooks('考研')">考研</button>
+        </div>
+        <div class="book-grid" id="bookList">
+            <!-- 书籍卡片由 JavaScript 动态生成 -->
+        </div>
+    </div>
+    <script>
+        const books = [
+            { id: 1, name: '高等数学', category: '教材', price: 15, seller: '李同学' },
+            { id: 2, name: '大学英语', category: '教材', price: 10, seller: '王同学' },
+            { id: 3, name: '数据结构', category: '教材', price: 18, seller: '张同学' },
+            { id: 4, name: '考研政治1000题', category: '考研', price: 25, seller: '刘同学' },
+            { id: 5, name: '考研英语历年真题', category: '考研', price: 30, seller: '陈同学' }
+        ];
+
+        function renderBooks(filterCategory = 'all') {
+            const list = document.getElementById('bookList');
+            list.innerHTML = '';
+            books.forEach(book => {
+                if(filterCategory === 'all' || book.category === filterCategory) {
+                    const card = document.createElement('div');
+                    card.className = 'book-card';
+                    card.onclick = () => window.location.href = 'detail.html?name=' + encodeURIComponent(book.name);
+                    card.innerHTML = `
+                        <img src="https://via.placeholder.com/220x200/eeeeee/333333?text=${book.name}" alt="${book.name}">
+                        <div class="book-info">
+                            <h3>${book.name}</h3>
+                            <p class="price">¥${book.price}.00</p>
+                            <p class="seller">卖家：${book.seller}</p>
+                        </div>
+                    `;
+                    list.appendChild(card);
+                }
+            });
+        }
+
+        function filterBooks(category) {
+            document.getElementById('pageTitle').innerText = category === 'all' ? '全部书籍' : category + '书籍';
+            renderBooks(category);
+        }
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const keyword = urlParams.get('keyword');
+            if(keyword) {
+                document.getElementById('pageTitle').innerText = '搜索：“' + keyword + '” 的结果';
+            }
+            renderBooks('all');
+        }
+    </script>
+</body>
+</html>
